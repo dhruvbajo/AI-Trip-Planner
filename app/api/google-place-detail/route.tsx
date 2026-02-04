@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { config } from '../../../middleware';
 import axios from "axios";
-
+//route for google places
 export async function POST(req:NextRequest){
   const {placeName}=await req.json();
   const BASE_URL = 'https://places.googleapis.com/v1/places:searchText'
