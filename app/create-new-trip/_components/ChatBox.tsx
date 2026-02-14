@@ -12,7 +12,7 @@ import FinalUi from './FinalUi'
 import { useMutation } from 'convex/react'
 import { CreateTripDetail } from '../../../convex/tripDetail';
 import { api } from '@/convex/_generated/api'
-import { useUserDetail } from '@/app/Provider'
+import { useTripDetail, useUserDetail } from '@/app/Provider'
 import {v4 as uuidv4} from 'uuid'
 import Itinerary from './Itinerary';
 
@@ -60,6 +60,7 @@ export type Activity={
 }
 
 export type Itinerary={
+  map(arg0: (dayData: any) => { title: string; content: React.JSX.Element }): unknown
   day:number;
   day_plan:string;
   best_time_to_visit:string;
@@ -74,7 +75,8 @@ function ChatBox() {
   const [tripDetail,setTripDetail]=useState<TripInfo>();
   const SaveTripDetail=useMutation(api.tripDetail.CreateTripDetail)
   const {userDetail,setUserDetail}=useUserDetail();
-  
+  //@ts-ignore
+  const {tripDetailInfo,setTripDetailInfo}=useTripDetail();
   const onSend=async()=>{
     if(!userInput?.trim()) return;
 
@@ -108,6 +110,7 @@ function ChatBox() {
 
     if(isFinal){
       setTripDetail(result?.data?.trip_plan)  
+      setTripDetailInfo(result?.data?.trip_plan)
       const tripId= uuidv4();
       await SaveTripDetail({
         tripDetail:result?.data?.trip_plan,
@@ -161,7 +164,7 @@ function ChatBox() {
   },[isFinal]);
 
   return (
-    <div className='h-[81vh] flex flex-col round'>
+    <div className='h-[81vh] flex flex-col round border rounded-2xl p-5'>
       {messages?.length==0&&
       <EmptyBoxState onSelectOption={(v:string)=>{setUserInput(v); onSend()}}/>
       }
