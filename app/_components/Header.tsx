@@ -34,7 +34,7 @@ function Header() {
       {/* Logo */}
       <div  className='flex gap-2 items-center'>
         <Image src={'/logo.svg'} alt='logo' width={30} height={30}/>
-        <h2 className='font-bold text-2xl'>AI Trip Planner</h2>
+        <h2 className='font-bold text-2xl'>GHUMMO.AI</h2>
       </div>
       
 
