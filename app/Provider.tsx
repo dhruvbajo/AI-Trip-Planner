@@ -53,6 +53,16 @@ export const useUserDetail=()=>{
   return useContext(UserDetailContext);
 }
 
-export const useTripDetail=():TripContextType|undefined=>{
-  return useContext(TripDetailContext);
-}
+// export const useTripDetail=():TripContextType|undefined=>{
+//   return useContext(TripDetailContext);
+// }
+
+export const useTripDetail = (): TripContextType => {
+  const context = useContext(TripDetailContext);
+
+  if (!context) {
+    throw new Error("useTripDetail must be used within Provider");
+  }
+
+  return context;
+};

@@ -17,7 +17,7 @@ import Image, { ImageProps } from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 
 interface CarouselProps {
-  items: JSX.Element[];
+  items: React.ReactNode[];
   initialScroll?: number;
 }
 
@@ -114,6 +114,16 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
                   opacity: 0,
                   y: 20,
                 }}
+                // animate={{
+                //   opacity: 1,
+                //   y: 0,
+                //   transition: {
+                //     duration: 0.5,
+                //     delay: 0.2 * index,
+                //     ease: "easeOut",
+                //     once: true,
+                //   },
+                // }}
                 animate={{
                   opacity: 1,
                   y: 0,
@@ -121,7 +131,6 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
                     duration: 0.5,
                     delay: 0.2 * index,
                     ease: "easeOut",
-                    once: true,
                   },
                 }}
                 key={"card" + index}
